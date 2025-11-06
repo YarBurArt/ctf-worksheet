@@ -16,6 +16,7 @@
 | [VolgaCTF 2019 Quals](https://github.com/zst-ctf/volgactf-2019-writeups/tree/master) | Crypto, PWN, stego ? | - |
 | [AltayCTF 2019](https://github.com/SharLike-CTF-Team/altayctf-2019) | Attack/Defense | АлтГТУ SharLike, aciso.ru |
 | [TyumenCTF 2025](https://github.com/lciga/TyumenCTF-2025-Writeups) | Crypto, Web, rev, PWN, OSINT, stego | utmn.ru |
+| [Ugra CTF Quals 2025](https://github.com/teamteamdev/ugractf-2025-quals) | Crypto, Forensics, Web, OSINT, PPC, Rev, Stego, misc, ctb | teamteam.dev |
 | [OmCTF 2025](https://github.com/acisoru/OmCTF-2025/tree/main) | Attack/Defense | aciso.ru |
 | [MiaCTF 2025](https://github.com/acisoru/MIACTF_2025/tree/main) | Crypto, PWN, rev, Web, Forensic, stego, ppc, admin | aciso.ru |
 | [NSK School CTF 2025](https://github.com/acisoru/nskctf2025) | Crypto, PWN, rev, Web, Forensic, OSINT, misc, ppc | aciso.ru |
