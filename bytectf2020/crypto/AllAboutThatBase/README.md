@@ -20,7 +20,7 @@
 Через эту утилиту декодируем обратно в ASCII 
 https://onlineasciitools.com/convert-arbitrary-base-to-ascii
 
-<img src="Flag.png">
+<img src="https://github.com/rishitsaiya/ByteCTF-Writeups/blob/master/crypto/All%20About%20That%20Base/Flag.png">
 
 #### Step-5:
 Итоговый флаг будет:
