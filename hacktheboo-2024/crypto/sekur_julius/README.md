@@ -99,3 +99,5 @@ def decrypt():
     for i in range(1, 26):
     	print(f'{i = } | {julius_decrypt(enc, i)}')
 ```
+
+Флаг : HTB{SECURITYOFATHOUSANDOR...}
