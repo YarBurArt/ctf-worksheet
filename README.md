@@ -6,6 +6,7 @@
 |-------------|-----------|---------|
 | [Cyber Apocalypse 2025](<cyber_apocalypse>)| Crypto, reverse, Pwn, Web, forensic, coding, OSINT, ML | HTB |
 | [Hacker101](<hacker101>) | Web, Crypto, Android | HackerOne |
+| [Hack The Boo 2024](<hacktheboo-2024>) | Crypto, PWN, rev, Web, forensics, coding | HTB |
 | [ByteCTF 2020](<bytectf2020>) | Web, Crypto, PWN, Forensic | ByteClub |
 | [AngstromCTF 2021](<angstromCTF-2021>) | Crypto, rev, misc | students from MBHS |
 | [GoCTF 2025](https://github.com/bysmaks/GOCTF-2025) | Crypto, Forensic, PWN, Web, OSINT, ppc, rev, stego | Минцифра Республики Татарстан, aciso.ru , itpark|
