@@ -25,3 +25,4 @@
 | [RuCTF Finals 2023](https://github.com/HackerDom/ructf-finals-2023) | Attack/Defense | - |
 | [M*CTF 2024 student quals](https://gitlab.com/mctf/mctf2024/student/quals) | Crypto, PWN, OSINT, Web, Forensic, rev, misc | mtuci.ru |
 | [M*CTF 2023 student finals](https://gitlab.com/mctf/mctf2023/student-finals) | Attack/Defense | - |
+| [Standoff365 Bootcamp](https://github.com/username6345/writeups_for_the_reader) | Web, Pentest | Standoff365 / Positive Technologies |
