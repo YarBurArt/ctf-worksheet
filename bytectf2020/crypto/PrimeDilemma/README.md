@@ -1,4 +1,4 @@
-## Prime Dilemma
+# PrimeDilemma
 
 Основная идея ипользовать RSA Encryption с известными значениями факторизации.
 

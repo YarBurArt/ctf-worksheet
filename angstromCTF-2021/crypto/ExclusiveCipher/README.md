@@ -1,8 +1,10 @@
+# Exclusive Cipher
+
 ## angstromCTF-2021
 
 
 
-## Задача 2(Exclusive Cipher)
+## Задача 2
 
 Подготовлено: `aplet123`
 

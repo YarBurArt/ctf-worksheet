@@ -1,8 +1,10 @@
+# Sosig/Crypto
+
 ## angstromCTF-2021
 
 
 
-## Задача 1(Sosig)
+## Задача 1
 
 Подготовлено: `preterite`
 
