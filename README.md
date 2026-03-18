@@ -26,3 +26,5 @@
 | [M*CTF 2024 student quals](https://gitlab.com/mctf/mctf2024/student/quals) | Crypto, PWN, OSINT, Web, Forensic, rev, misc | mtuci.ru |
 | [M*CTF 2023 student finals](https://gitlab.com/mctf/mctf2023/student-finals) | Attack/Defense | - |
 | [Standoff365 Bootcamp](https://github.com/username6345/writeups_for_the_reader) | Web, Pentest | Standoff365 / Positive Technologies |
+| [AxiomCTF 2026](https://github.com/AxiomCTF/AxiomCTF-2026-Tasks) | Web, Crypto, Admin, OSINT, Stegano, misc / joy, PWN, rev, Forensics  | 4x10m.ru |
+| [MIPT CTF Quals 2026](https://github.com/notdenied/miptctf_2026) | Web, rev, PWN, crypto, OSINT, misc | MIPT |
