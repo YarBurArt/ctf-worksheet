@@ -23,7 +23,7 @@ git checkout -b add/challenge-writeup
 
 2. Добавить writeup
 ```bash
-git add ctf/web/your-challenge/README.md
+git add ctf-ru/<event>/<category>/your-challenge/README.md
 git commit -m "add/web-exploitation-sqlinjection-writeup"
 git push origin add/challenge-writeup
 ```
